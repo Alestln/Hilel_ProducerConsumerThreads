@@ -2,7 +2,8 @@
 
 public class Producer
 {
-    private Buffer _buffer;
+    private readonly Buffer _buffer;
+    private int _data = 1;
 
     public Producer(Buffer buffer)
     {
@@ -11,15 +12,9 @@ public class Producer
 
     public void ProduceData()
     {
-        int count = 1;
-        while (true)
-        {
-            //int data = Random.Shared.Next(100);
-            int data = count;
-            _buffer.Produce(data);
-            LogData.Log($"Produce data: {data}");
-            Thread.Sleep(Random.Shared.Next(1000));
-            count++;
-        }
+        _buffer.Produce(_data);
+        LogData.Log($"Produce data: {_data}");
+        Thread.Sleep(Random.Shared.Next(1000));
+        _data++;
     }
 }

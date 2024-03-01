@@ -19,6 +19,9 @@ public class Consumer
         else
         {
             // Some logic for waiting result
+            // Possible spawn location StackOverflow exception
+            Thread.Sleep(500);
+            ConsumeData();
         }
     }
 }
