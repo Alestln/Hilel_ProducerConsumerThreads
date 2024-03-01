@@ -1,17 +1,17 @@
 ﻿namespace ProducerConsumerThreads;
 
-public class LogData
+public static class LogData
 {
-    private static string _filePath = "log.txt";
-    private static object locker = new();
+    private const string FilePath = "log.txt";
+    private static readonly object Locker = new();
 
     public static void Log (string message)
     {
-        lock (locker)
+        lock (Locker)
         {
-            using var filestream = new FileStream(_filePath, FileMode.Append);
+            using var filestream = new FileStream(FilePath, FileMode.Append);
             using var streamWriter = new StreamWriter(filestream);
-        
+            
             streamWriter.WriteLine(message);
         }
     }

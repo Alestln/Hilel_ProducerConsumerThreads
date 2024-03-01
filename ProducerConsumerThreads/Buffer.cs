@@ -15,10 +15,10 @@ public class Buffer
     public int Consume()
     {
         int data;
-        if (_bufferQueue.TryDequeue(out data))
+        while (!_bufferQueue.TryDequeue(out data))
         {
-            return data;
+            // Some logic for waiting data
         }
-        return -1; // Return a sentinel value if the queue is empty
+        return data;
     }
 }
