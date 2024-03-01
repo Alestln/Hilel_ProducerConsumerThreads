@@ -2,7 +2,7 @@
 
 public class Consumer
 {
-    private Buffer _buffer;
+    private readonly Buffer _buffer;
 
     public Consumer(Buffer buffer)
     {
@@ -11,11 +11,14 @@ public class Consumer
 
     public void ConsumeData()
     {
-        while (true)
+        if (_buffer.Consume(out var data))
         {
-            int data = _buffer.Consume();
             LogData.Log($"Consume data: {data}");
             Thread.Sleep(Random.Shared.Next(1000));
+        }
+        else
+        {
+            // Some logic for waiting result
         }
     }
 }

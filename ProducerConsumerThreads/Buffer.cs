@@ -2,23 +2,23 @@
 
 namespace ProducerConsumerThreads;
 
+public class OperationResult
+{
+    public int Data { get; set; }
+    public bool IsSuccess { get; set; }
+}
+
 public class Buffer
 {
-    private object _bufferLock = new();
-    private ConcurrentQueue<int> _bufferQueue = new();
+    private readonly ConcurrentQueue<int> _bufferQueue = new();
 
     public void Produce(int data)
     {
         _bufferQueue.Enqueue(data);
     }
     
-    public int Consume()
+    public bool Consume(out int data)
     {
-        int data;
-        while (!_bufferQueue.TryDequeue(out data))
-        {
-            // Some logic for waiting data
-        }
-        return data;
+        return _bufferQueue.TryDequeue(out data);
     }
 }
